@@ -10,11 +10,11 @@
     font-weight: 800;
 }
 
-.cart .badge {
-    background-color: aqua;
-    left: -7px;
-    top: -10px;
+i {
+    font-size: 20px;
+    text-align: center;
 }
+
 
 #cart-component,
 #profile-component {
