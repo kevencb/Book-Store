@@ -1,5 +1,7 @@
 import React from 'react'
 import '../App.css';
+import CartWidget from './CartWidget';
+import UserProfile from './UserProfile';
 
 const Header = () => {
 	return (
@@ -19,35 +21,9 @@ const Header = () => {
 				</div>
 			</nav>
 
-			{/* Carrito */}
-			<div className="offcanvas offcanvas-start" tabIndex="-1" id="cart-component" aria-labelledby="cart-componentLabel">
-				<div className="offcanvas-header bg-warning py-4">
-					<a className="d-flex align-items-center navbar-brand text-white" href="/#" aria-label='Enlace de prueba'>Book<i className="text-ligth bi bi-cart"></i>Store</a>
-					<button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-				</div>
-				<div className="offcanvas-body">
-					Aún no has agregado libros...
-				</div>
-			</div>
+			<CartWidget />
+			<UserProfile />
 
-			{/* Perfil Usuario */}
-			<div className="offcanvas offcanvas-start" tabIndex="-1" id="profile-component" aria-labelledby="profile-componentLabel">
-				<div className="offcanvas-header bg-dark py-4">
-					<a className="d-flex align-items-center navbar-brand text-white" href="/#" aria-hidden="true" aria-label='Enlace de prueba'>Book<i className="bi bi-person-circle"></i>Perfil</a>
-					<button type="button" className="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-				</div>
-				<div className="offcanvas-body mt-2 px-4">
-					<button className="btn list-group-item d-flex align-items-center px-0 py-3 gap-2">
-						<i className="bi bi-bag"></i>Tus pedidos
-					</button>
-					<button className="btn list-group-item d-flex align-items-center px-0 py-3 gap-2">
-						<i className="bi bi-moon-stars"></i>Lista de deseos
-					</button>
-					<button className="btn list-group-item d-flex align-items-center px-0 py-3 gap-2">
-						<i className="bi bi-box-arrow-left"></i>Cerrar sesión
-					</button>
-				</div>
-			</div>
 		</>
 	);
 }

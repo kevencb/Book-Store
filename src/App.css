@@ -25,3 +25,24 @@ i {
 .categories {
     overflow-wrap: break-word;
 }
+
+.books {
+    display: grid;
+    gap: 16px;
+    grid-template-columns: repeat(5, 1fr);
+    margin: 32px auto;
+}
+
+.books .card-title {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.books h5 {
+    opacity: .5;
+}
+
+.books h6 {
+    font-size: 16px;
+    font-weight: bold;
+}
