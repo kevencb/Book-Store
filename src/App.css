@@ -49,21 +49,19 @@ i {
 .cover {
     border-radius: 8px;
     display: block;
+    height: 256px;
     margin-bottom: 0;
-    max-height: 260px;
-    object-fit: contain;
+    object-fit: cover;
     overflow: hidden;
 }
 
 .books .card-title {
-    align-items: center;
-    display: flex;
     font-size: 15px;
     font-weight: bold;
+    height: 38px;
     margin-bottom: 4px;
-    max-height: 40px;
+    max-height: 38px;
     overflow: hidden;
-    text-overflow: ellipsis;
 }
 
 .books h5 {

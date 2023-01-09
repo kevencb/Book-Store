@@ -1,12 +1,11 @@
-import React, { useState, useEffect } from "react"
-import { useParams } from "react-router-dom";
+import React, { useEffect, useState } from "react"
 import { bookStore } from "../../data/bookStore";
 import { ItemList } from "../ItemList/ItemList";
+import { useParams } from 'react-router-dom';
+const ItemListContainer = ({ addCart, books }) => {
 
-const ItemListContainer = ({ addCart }) => {
-
-    const [books, setBooks] = useState([])
     const { genreName } = useParams();
+    const [booksCategories, setBooksCategories] = useState([])
 
     useEffect(() => {
         const getBooks = () => {
@@ -15,7 +14,7 @@ const ItemListContainer = ({ addCart }) => {
                 const booksFilter = bookStore.filter(
                     book => book.genre === genreName
                 )
-                const booksList = genreName ? booksFilter : books
+                const booksList = genreName ? booksFilter : bookStore
                 setTimeout(() => {
                     res(booksList)
                 }, 0)
@@ -23,15 +22,15 @@ const ItemListContainer = ({ addCart }) => {
         }
         getBooks()
             .then((res) => {
-                setBooks(res)
+                setBooksCategories(res)
             })
             .catch((error) => {
                 console.log(error)
             })
-    }, [books, genreName]);
+    }, [genreName]);
 
     return (
-        <ItemList books={books} addCart={addCart} />
+        <ItemList booksCategories={booksCategories} addCart={addCart} />
     );
 }
 
