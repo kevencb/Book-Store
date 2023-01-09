@@ -1,7 +1,8 @@
-import React from 'react'
-import '../App.css';
+import { React, useState } from 'react'
+import '../../App.css';
 
 const CartWidget = () => {
+
     return (
         <div className="offcanvas offcanvas-start" tabIndex="-1" id="cart-component" aria-labelledby="cart-componentLabel">
             <div className="offcanvas-header bg-warning py-4">

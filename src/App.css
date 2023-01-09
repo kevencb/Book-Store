@@ -15,7 +15,6 @@ i {
     text-align: center;
 }
 
-
 #cart-component,
 #profile-component {
     max-width: 360px;
@@ -45,10 +44,32 @@ i {
     }
 }
 
+.cover {
+    border-radius: 8px;
+    max-height: 245px;
+    overflow: hidden;
+}
+
+@media (min-width: 720px) {
+    .cover {
+        max-height: 236px;
+    }
+}
+
+@media (min-width: 1140px) {
+    .cover {
+        max-height: 295px;
+    }
+}
 
 .books .card-title {
     font-size: 16px;
     font-weight: bold;
+    height: 40px;
+    max-height: 40px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: wrap;
 }
 
 .books h5 {
