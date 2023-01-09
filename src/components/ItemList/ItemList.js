@@ -1,14 +1,15 @@
 import React from 'react'
-import { ItemBook } from '../ItemBook/ItemBook.js';
+import { ItemBook } from '../ItemBook/ItemBook'
+// import { useParams } from 'react-router-dom';
 
-const ItemList = ({ books, addCart }) => {
+const ItemList = ({ addCart, books }) => {
+    // const { genreName } = useParams();
+    // console.log(genreName)
 
     return (
-        <ul className='books container'>
-            {books.map((book) => {
-                return <ItemBook key={book.id} book={book} addCart={addCart} />
-            })}
-        </ul>
+        <div className='books container'>
+            {books.map(book => <ItemBook key={book.id} book={book} addCart={addCart} />)}
+        </div>
     );
 }
 
