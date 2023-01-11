@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router-dom'
+import { ButtonAddCart } from '../Buttons/ButtonAddCart';
 
 const ItemBook = ({ book, addCart }) => {
     const { title, cover, author, price } = book
@@ -10,8 +12,8 @@ const ItemBook = ({ book, addCart }) => {
                 <h5 className='author small'>{author}</h5>
                 <h6 className='precio'>{price}</h6>
                 <div className="d-flex flex-column mt-3" role="group" aria-label="Basic example">
-                    <button className='d-flex align-items-center justify-content-center gap-2 btn btn-sm btn-md-md btn-outline-dark mb-2'> <i className="bi bi-plus-circle"></i> Más info</button>
-                    <button onClick={addCart} className='d-flex align-items-center justify-content-center gap-2 btn btn-sm btn-md-md bg-warning'><i className="bi bi-cart-plus"></i> Añadir</button>
+                    <Link to={`/bookInfo/${book.id}`} className='d-flex align-items-center justify-content-center gap-2 btn btn-sm btn-md-md btn-outline-dark mb-2'> <i className="bi bi-plus-circle"></i> Más info</Link>
+                    <ButtonAddCart addCart={addCart} />
                 </div>
             </div>
         </div >

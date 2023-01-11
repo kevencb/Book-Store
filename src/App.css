@@ -49,10 +49,22 @@ i {
 .cover {
     border-radius: 8px;
     display: block;
-    height: 256px;
+    height: 270px;
     margin-bottom: 0;
     object-fit: cover;
     overflow: hidden;
+}
+
+@media (min-width: 720px) {
+    .cover {
+        height: 220px;
+    }
+}
+
+@media (min-width: 1280px) {
+    .cover {
+        height: 268px;
+    }
 }
 
 .books .card-title {
