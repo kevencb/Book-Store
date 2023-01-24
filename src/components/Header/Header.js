@@ -1,10 +1,10 @@
 import React from 'react'
 import '../../App.css';
-import CartWidget from '../CartWidget/CartWidget';
+import { CartWidget } from '../CartWidget/CartWidget';
 import UserProfile from '../UserProfile/UserProfile';
 import { Link } from 'react-router-dom';
 
-const Header = ({ cantidadCart }) => {
+const Header = ({ cart }) => {
 
 	return (
 		<>
@@ -14,7 +14,7 @@ const Header = ({ cantidadCart }) => {
 					<div className='d-flex gap-2'>
 						<button className='border border-warning cart d-flex align-items-center gap-1 btn text-ligth' type='button' data-bs-toggle="offcanvas" data-bs-target="#cart-component" aria-controls="cart-component">
 							<i className="text-warning bi bi-cart"></i>
-							<span className="badge rounded-pill text-bg-warning">{cantidadCart}</span>
+							<span className="badge rounded-pill text-bg-warning">{cart.amount}</span>
 						</button>
 						<button className='profile d-flex align-items-center btn btn-warning ' type='button' data-bs-toggle="offcanvas" data-bs-target="#profile-component" aria-controls="profile-component">
 							<i className="bi bi-person-circle"></i>
@@ -22,7 +22,7 @@ const Header = ({ cantidadCart }) => {
 					</div>
 				</div>
 			</nav>
-			<CartWidget />
+			<CartWidget cart={cart} />
 			<UserProfile />
 		</>
 	);

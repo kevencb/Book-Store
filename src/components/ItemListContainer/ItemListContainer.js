@@ -2,10 +2,9 @@ import React, { useEffect, useState } from "react"
 import { bookStore } from "../../data/bookStore";
 import { ItemList } from "../ItemList/ItemList";
 import { useParams } from 'react-router-dom';
-const ItemListContainer = ({ addCart, books }) => {
+const ItemListContainer = ({ addCart, books, addBookCart }) => {
 
     const { genreName } = useParams();
-    console.log(genreName)
     const [booksCategories, setBooksCategories] = useState([])
 
     useEffect(() => {
@@ -31,7 +30,7 @@ const ItemListContainer = ({ addCart, books }) => {
     }, [genreName]);
 
     return (
-        <ItemList booksCategories={booksCategories} addCart={addCart} />
+        <ItemList booksCategories={booksCategories} addBookCart={addBookCart} />
     );
 }
 
