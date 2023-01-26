@@ -1,10 +1,12 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { ItemBook } from '../ItemBook/ItemBook'
+import { ContextCart } from '../../context/contextCartShopping';
 
-const ItemList = ({ addCart, booksCategories, addItemCart, addBookCart }) => {
+const ItemList = ({ booksCategories }) => {
+    const { addBookCart } = useContext(ContextCart)
     return (
         <div className='books container'>
-            {booksCategories.map(book => <ItemBook key={book.id} book={book} addCart={addCart} addBookCart={addBookCart} />)}
+            {booksCategories.map(book => <ItemBook key={book.id} book={book} addBookCart={addBookCart} />)}
         </div>
     );
 }

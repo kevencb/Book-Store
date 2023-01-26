@@ -1,12 +1,12 @@
-import { React } from 'react'
+import React, { useContext } from 'react'
 import '../../App.css';
 import './CartWidget.css'
-// import cover from '../../assets/images/covers_books/harry_potter_01.jpeg'
+import { ContextCart } from '../../context/contextCartShopping';
 
-const CartWidget = ({ cart }) => {
-
+const CartWidget = () => {
+    const { cart } = useContext(ContextCart)
     return (
-        <div className="offcanvas offcanvas-start" tabIndex="-1" id="cart-component" aria-labelledby="cart-componentLabel">
+        <div className="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="true" tabIndex="-1" id="cart-component" aria-labelledby="cart-componentLabel">
             <div className="offcanvas-header bg-warning py-4">
                 <a className="d-flex align-items-center navbar-brand text-white" href="/#" aria-label='Enlace de prueba'>Book<i className="text-ligth bi bi-cart"></i>Store</a>
                 <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -31,8 +31,6 @@ const CartWidget = ({ cart }) => {
                                         <button className='btn btn-sm btn-warning'>+</button>
                                     </div>
                                 </div>
-                                {console.log("DataBook: " + item.title)}
-                                {console.log("Hola: " + item.id)}
                             </article>
                         )
                     })

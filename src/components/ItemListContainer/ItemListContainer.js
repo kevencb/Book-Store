@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react"
 import { bookStore } from "../../data/bookStore";
 import { ItemList } from "../ItemList/ItemList";
 import { useParams } from 'react-router-dom';
-const ItemListContainer = ({ addCart, books, addBookCart }) => {
+
+const ItemListContainer = () => {
 
     const { genreName } = useParams();
     const [booksCategories, setBooksCategories] = useState([])
@@ -30,7 +31,7 @@ const ItemListContainer = ({ addCart, books, addBookCart }) => {
     }, [genreName]);
 
     return (
-        <ItemList booksCategories={booksCategories} addBookCart={addBookCart} />
+        <ItemList booksCategories={booksCategories} />
     );
 }
 

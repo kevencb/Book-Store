@@ -3,7 +3,7 @@ import { ItemDetail } from '../ItemDetail/ItemDetail';
 import { bookStore } from '../../data/bookStore';
 import { useParams } from 'react-router-dom';
 
-const ItemDetailContainer = () => {
+const ItemDetailContainer = ({ addBookCart, books }) => {
 
     const [book, setBook] = useState({})
 
@@ -31,7 +31,7 @@ const ItemDetailContainer = () => {
     }, [setBook, bookInfo]);
 
     return (
-        <ItemDetail book={book} />
+        <ItemDetail book={book} books={books} addBookCart={addBookCart} />
     );
 }
 

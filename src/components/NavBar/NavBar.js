@@ -1,8 +1,9 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
+import { ContextCart } from '../../context/contextCartShopping'
 
-const NavBar = ({ books }) => {
-
+const NavBar = () => {
+    const { books } = React.useContext(ContextCart)
     const genreBook = books.map(book => book.genre)
     const genreSet = new Set(genreBook)
     const uniqueGenres = [...genreSet]
