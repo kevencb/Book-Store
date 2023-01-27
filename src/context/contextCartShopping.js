@@ -9,6 +9,9 @@ const ProviderCart = ({ children }) => {
     const [books, setBooks] = useState([])
     const [cart, setCart] = useState([])
 
+    console.log("Books: " + books)
+    console.log("Cart" + cart)
+
     const addBookCart = (id, cover, title, author, price, subtotal) => {
         if (cart.length === 0) {
             setCart([{ id, cover, title, author, price, amount: 1, subtotal }])
@@ -41,7 +44,7 @@ const ProviderCart = ({ children }) => {
                 //aumentar la cantidad y el precio unitario
                 return {
                     ...item,
-                    amount: +item.amount + 1,
+                    amount: item.amount + 1,
                     // subtotal: +item.amount - +item.amount,
                 }
             }
@@ -55,11 +58,10 @@ const ProviderCart = ({ children }) => {
         //buscar el id del libro
         const newCart = cart.map(item => {
             if (item.id === id) {
-                //aumentar la cantidad y el precio unitario
+                //disminuir la cantidad y el precio unitario
                 return {
                     ...item,
-                    amount: +item.amount - 1,
-                    // subtotal: +item.amount - +item.amount,
+                    amount: item.amount - 1,
                 }
             }
             return item

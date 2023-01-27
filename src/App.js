@@ -14,7 +14,7 @@ function App() {
 				<ProviderCart>
 					<Header />
 					<Routes>
-						<Route path='/' element={
+						<Route path='/' exact={true} element={
 							<>
 								<NavBar />
 								<ItemListContainer />

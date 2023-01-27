@@ -4,7 +4,7 @@ export const bookStore = [
         cover: 'https://i.pinimg.com/736x/7f/c0/24/7fc024b2982c1bf1a6972ff8b4d6af49.jpg',
         title: "Harry Potter y la piedra filosofal",
         author: 'J.K Rowling',
-        price: '65',
+        price: '65000',
         genre: "fantasia",
         synopsis: "Harry Potter se ha quedado huérfano y vive en casa de sus abominables tíos y del insoportable primo Dudley. Harry se siente muy triste y solo hasta que un buen día recibe una carta que cambiará su vida para siempre. En ella le comunican que ha sido aceptado como alumno en el colegio interno Hogwarts de Magia y Hechicería. A partir de ese momento, la suerte de Harry da un vuelco espectacular. En esa escuela tan especial aprenderá encantamientos, trucos fabulosos y tácticas de defensa contra las artes oscuras. Se convertirá en el campeón escolar de Quidditch, especie de fútbol aéreo que se juega montado sobre escobas, y se hará un puñado de buenos amigos... aunque también algunos temibles enemigos. Pero sobre todo, conocerá los secretos que le permitirán cumplir con su destino. Pues, aunque no lo parezca a primera vista, Harry no es un chico común y corriente. ¡Es un verdadero mago!"
     },
@@ -13,7 +13,7 @@ export const bookStore = [
         cover: 'https://i.pinimg.com/564x/75/7b/86/757b86082afa8eed0d2e36e6cb494c9c.jpg',
         title: "Yo, Julia",
         author: 'Santiago Posteguillo',
-        price: '45',
+        price: '45000',
         genre: "historia",
         synopsis: "Yo, Julia Por Santiago Posteguillo ,192 d.C. Varios hombres luchan por un imperio, pero Julia, hija de reyes, madre de césares y esposa de emperador, piensa en algo más grande: una dinastía. Roma está bajo el control de Cómodo, un emperador loco. El Senado se conjura para terminar con el tirano y los gobernadores militares más poderosos podrían dar un golpe de Estado: Albino en Britania, Severo en el Danubio o Nigro en Siria. Cómodo retiene a sus esposas para evitar su rebelión y Julia, la mujer de Severo, se convierte así en rehén. De pronto, Roma arde. Un incendio asola la ciudad. ¿Es un desastre o una oportunidad? Cinco hombres se disponen a luchar a muerte por el poder. Creen que la partida está a punto de empezar. Pero para Julia la partida ya ha empezado. Sabe que solo una mujer puede forjar una dinastía."
     },

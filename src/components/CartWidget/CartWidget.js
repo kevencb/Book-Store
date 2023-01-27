@@ -2,7 +2,6 @@ import React, { useContext, useMemo } from 'react'
 import '../../App.css';
 import './CartWidget.css'
 import { ContextCart } from '../../context/contextCartShopping';
-import { ButtonAddCart } from '../Buttons/ButtonAddCart';
 
 const CartWidget = () => {
 
@@ -17,7 +16,7 @@ const CartWidget = () => {
             item.subtotal += item.price * item.amount
             total += item.subtotal
         })
-        return total;
+        return total.toLocaleString('es-ES');
     }, [cart]);
 
     return (
@@ -36,16 +35,16 @@ const CartWidget = () => {
                                     <div>
                                         <h4 className='book__title'>{item.title}</h4>
                                         <h6 className='book__author'>{item.author}</h6>
+                                        <h5 className='book__price'>${item.price}</h5>
                                     </div>
                                 </div>
                                 <div className='book__counter'>
-                                    <h5 className='book__price'>${item.price}</h5>
+                                    <p>${item.subtotal.toLocaleString('es-ES')}</p>
                                     <div className='book__buttons'>
                                         <button onClick={() => handleDecrement(item.id)} className='btn btn-sm btn-dark' disabled={item.amount === 0 ? true : false}>-</button>
                                         <p>{item.amount}</p>
                                         <button onClick={() => handleIncrement(item.id)} className='btn btn-sm btn-warning'>+</button>
                                     </div>
-                                    <p>SubTotal: {item.subtotal}</p>
                                 </div>
                             </article>
                         )
