@@ -1,10 +1,25 @@
-import React, { useContext } from 'react'
+import React, { useContext, useMemo } from 'react'
 import '../../App.css';
 import './CartWidget.css'
 import { ContextCart } from '../../context/contextCartShopping';
+import { ButtonAddCart } from '../Buttons/ButtonAddCart';
 
 const CartWidget = () => {
-    const { cart } = useContext(ContextCart)
+
+    const { cart, handleIncrement, handleDecrement } = useContext(ContextCart)
+
+    // Crea una variable para guardar el precio total
+    const total = useMemo(() => {
+        let total = 0;
+        // Itera sobre el carrito para sumar el precio de cada libro
+        cart.map((item) => {
+            item.subtotal = 0
+            item.subtotal += item.price * item.amount
+            total += item.subtotal
+        })
+        return total;
+    }, [cart]);
+
     return (
         <div className="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="true" tabIndex="-1" id="cart-component" aria-labelledby="cart-componentLabel">
             <div className="offcanvas-header bg-warning py-4">
@@ -26,10 +41,11 @@ const CartWidget = () => {
                                 <div className='book__counter'>
                                     <h5 className='book__price'>${item.price}</h5>
                                     <div className='book__buttons'>
-                                        <button className='btn btn-sm btn-dark'>-</button>
+                                        <button onClick={() => handleDecrement(item.id)} className='btn btn-sm btn-dark' disabled={item.amount === 0 ? true : false}>-</button>
                                         <p>{item.amount}</p>
-                                        <button className='btn btn-sm btn-warning'>+</button>
+                                        <button onClick={() => handleIncrement(item.id)} className='btn btn-sm btn-warning'>+</button>
                                     </div>
+                                    <p>SubTotal: {item.subtotal}</p>
                                 </div>
                             </article>
                         )
@@ -39,7 +55,7 @@ const CartWidget = () => {
                 <hr></hr>
                 <div className='total-cart'>
                     <h5>Total:</h5>
-                    <h4 className='lead'>$ 99.000</h4>
+                    <h4 className='lead'>${total}</h4>
                 </div>
             </div>
         </div >

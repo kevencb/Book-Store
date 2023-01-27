@@ -9,9 +9,9 @@ const ProviderCart = ({ children }) => {
     const [books, setBooks] = useState([])
     const [cart, setCart] = useState([])
 
-    const addBookCart = (id, cover, title, author, price) => {
+    const addBookCart = (id, cover, title, author, price, subtotal) => {
         if (cart.length === 0) {
-            setCart([{ id, cover, title, author, price, amount: 1 }])
+            setCart([{ id, cover, title, author, price, amount: 1, subtotal }])
         } else {
             // Revisar que el libro no este ya agregado.
             // Si ya esta, unicamente actulizamos su cantidad
@@ -24,15 +24,50 @@ const ProviderCart = ({ children }) => {
                 newCart.forEach((idBookAdd, index) => {
                     if (idBookAdd.id === id) {
                         const amount = newCart[index].amount
-                        newCart[index] = { id, cover, title, author, price, amount: amount + 1 }
+                        newCart[index] = { id, cover, title, author, price, amount: amount + 1, subtotal: price - price }
                     }
                 })
             } else {
-                newCart.push({ id, cover, title, author, price, amount: 1 })
+                newCart.push({ id, cover, title, author, price, amount: 1, subtotal })
             }
             setCart(newCart)
         }
     }
+
+    const handleIncrement = (id) => {
+        //buscar el id del libro
+        const newCart = cart.map(item => {
+            if (item.id === id) {
+                //aumentar la cantidad y el precio unitario
+                return {
+                    ...item,
+                    amount: +item.amount + 1,
+                    // subtotal: +item.amount - +item.amount,
+                }
+            }
+            return item
+        })
+        //actualizar el carrito
+        setCart(newCart)
+    }
+
+    const handleDecrement = (id) => {
+        //buscar el id del libro
+        const newCart = cart.map(item => {
+            if (item.id === id) {
+                //aumentar la cantidad y el precio unitario
+                return {
+                    ...item,
+                    amount: +item.amount - 1,
+                    // subtotal: +item.amount - +item.amount,
+                }
+            }
+            return item
+        })
+        //actualizar el carrito
+        setCart(newCart)
+    }
+
 
     useEffect(() => {
         const getBooks = () => {
@@ -54,7 +89,6 @@ const ProviderCart = ({ children }) => {
     const totalNumberBooks = cart.reduce((acc, item) => {
         return acc += item.amount
     }, 0)
-
 
     const { genreName } = useParams();
     const [booksCategories, setBooksCategories] = useState([])
@@ -87,7 +121,9 @@ const ProviderCart = ({ children }) => {
             books,
             addBookCart,
             totalNumberBooks,
-            booksCategories
+            booksCategories,
+            handleIncrement,
+            handleDecrement
         }}>
             {children}
         </ContextCart.Provider>
