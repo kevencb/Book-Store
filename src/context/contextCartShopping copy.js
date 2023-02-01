@@ -1,5 +1,6 @@
 import React, { createContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { bookStore } from '../data/bookStore';
 import { productsCollection } from '../firebase/firebaseConfig'
 import { getDocs, query, where } from 'firebase/firestore';
 
@@ -7,16 +8,11 @@ import { getDocs, query, where } from 'firebase/firestore';
 const ContextCart = createContext()
 
 const ProviderCart = ({ children }) => {
-    const { genreName } = useParams();
-
     const [books, setBooks] = useState([])
     const [cart, setCart] = useState([])
 
-
-    const genreBook = books.map(book => book.genre)
-    const genreSet = new Set(genreBook)
-    const uniqueGenres = [...genreSet]
-
+    console.log("Books: " + books)
+    console.log("Cart" + cart)
 
     const addBookCart = (id, cover, title, author, price, subtotal) => {
         if (cart.length === 0) {
@@ -75,6 +71,9 @@ const ProviderCart = ({ children }) => {
         //actualizar el carrito
         setCart(newCart)
     }
+
+
+    // useEffect(() => {
     //     const getBooks = () => {
     //         return new Promise((res, rej) => {
     //             setTimeout(() => {
@@ -112,34 +111,8 @@ const ProviderCart = ({ children }) => {
         return acc += item.amount
     }, 0)
 
-    useEffect(() => {
-        const getBooks = () => {
-            let filter
-            filter = query(productsCollection, where("genre", "==", "historia"))
-            // filter = query(productsCollection, where("genre", "==", "fantasia"))
-            // if (genreName) {
-            //     console.log("HOLA: + ")
-            // } else {
-            //     filter = productsCollection
-            //     console.log("hola desde else: " + filter)
-            // }
-
-            const pedidoPorCategoria = getDocs(filter)
-            pedidoPorCategoria
-                // pedido
-                .then((resultado) => {
-                    const productos = resultado.docs.map((doc) => {
-                        return { ...doc.data(), id: doc.id }
-                    })
-                    // setBooksCategories(productos)
-                    setBooks(productos)
-                })
-                .catch((error) => {
-                    console.log(error)
-                })
-        }
-        getBooks()
-    }, [genreName]);
+    const { genreName } = useParams();
+    const [booksCategories, setBooksCategories] = useState([])
 
     // useEffect(() => {
     //     const getBooks = () => {
@@ -163,54 +136,50 @@ const ProviderCart = ({ children }) => {
     //         })
     // }, [genreName]);
 
-    // useEffect(() => {
-    //     const getBooks = () => {
-    //         const pedido = getDocs(productsCollection)
-    //         pedido
-    //             .then((resultado) => {
-    //                 const productos = resultado.docs.map((doc) => {
-    //                     return { ...doc.data(), id: doc.id }
-    //                 })
-    //                 setBooks(productos)
-    //                 setBooksCategories(productos)
-    //                 console.log(productos)
-    //             })
-    //             .catch((error) => {
-    //                 console.log(error)
-    //             })
-    //     }
-    //     getBooks()
-    // }, [setBooks]);
+    useEffect(() => {
+        const getBooks = () => {
+            const pedido = getDocs(productsCollection)
+            pedido
+                .then((resultado) => {
+                    const productos = resultado.docs.map((doc) => {
+                        return { ...doc.data(), id: doc.id }
+                    })
+                    setBooks(productos)
+                })
+                .catch((error) => {
+                    console.log(error)
+                })
+        }
+        getBooks()
+    }, [setBooks, genreName]);
 
-    // useEffect(() => {
-    //     const getBooks = () => {
-    //         let filter
-    //         filter = query(productsCollection, where("genre", "==", "historia"))
-    //         // filter = query(productsCollection, where("genre", "==", "fantasia"))
-    //         // if (genreName) {
-    //         //     console.log("HOLA: + ")
-    //         // } else {
-    //         //     filter = productsCollection
-    //         //     console.log("hola desde else: " + filter)
-    //         // }
+    useEffect(() => {
+        const getBooks = () => {
+            // const pedido = getDocs(productsCollection)
+            let filter
 
-    //         const pedidoPorCategoria = getDocs(filter)
-    //         pedidoPorCategoria
-    //             // pedido
-    //             .then((resultado) => {
-    //                 const productos = resultado.docs.map((doc) => {
-    //                     return { ...doc.data(), id: doc.id }
-    //                 })
-    //                 // setBooksCategories(productos)
-    //                 setBooks(productos)
-    //             })
-    //             .catch((error) => {
-    //                 console.log(error)
-    //             })
-    //     }
-    //     getBooks()
-    // }, [genreName]);
+            if (genreName) {
+                filter = query(productsCollection, where("categories", "==", genreName))
+                console.log("HOLA: " + books)
+            } else {
+                filter = productsCollection
+                console.log("hola desde else: " + filter)
+            }
+            const pedidoPorCategoria = getDocs(filter)
 
+            pedidoPorCategoria
+                .then((resultado) => {
+                    const productos = resultado.docs.map((doc) => {
+                        return { ...doc.data(), id: doc.id }
+                    })
+                    setBooksCategories(productos)
+                })
+                .catch((error) => {
+                    console.log(error)
+                })
+        }
+        getBooks()
+    }, [genreName, setBooks]);
 
     // useEffect(() => {
     //     const getBooks = () => {
@@ -235,11 +204,9 @@ const ProviderCart = ({ children }) => {
             books,
             addBookCart,
             totalNumberBooks,
-            // booksCategories,
+            booksCategories,
             handleIncrement,
-            handleDecrement,
-            // setBooksCategories,
-            uniqueGenres
+            handleDecrement
         }}>
             {children}
         </ContextCart.Provider>

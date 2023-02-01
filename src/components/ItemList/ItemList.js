@@ -2,11 +2,11 @@ import React, { useContext } from 'react'
 import { ItemBook } from '../ItemBook/ItemBook'
 import { ContextCart } from '../../context/contextCartShopping';
 
-const ItemList = ({ booksCategories }) => {
+const ItemList = ({ books }) => {
     const { addBookCart } = useContext(ContextCart)
     return (
         <div className='books container'>
-            {booksCategories.map(book => <ItemBook key={book.id} book={book} addBookCart={addBookCart} />)}
+            {books.map(book => <ItemBook key={book.id} book={book} addBookCart={addBookCart} />)}
         </div>
     );
 }

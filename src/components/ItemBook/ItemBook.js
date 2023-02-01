@@ -3,12 +3,10 @@ import { Link } from 'react-router-dom'
 import { ButtonAddCart } from '../Buttons/ButtonAddCart';
 
 const ItemBook = ({ book }) => {
-    const { id, title, cover, author, price } = book
+    const { id, title, cover, author } = book
 
     let numero = book.price
     let newPrice = +numero
-    console.log("Nuevo precio: " + newPrice)
-    console.log(typeof (newPrice))
 
     return (
         <div className="card border-0 ">

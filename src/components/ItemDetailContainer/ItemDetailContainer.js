@@ -35,4 +35,4 @@ const ItemDetailContainer = ({ addBookCart, books }) => {
     );
 }
 
-export { ItemDetailContainer };
+export { ItemDetailContainer }

@@ -3,11 +3,7 @@ import { NavLink } from 'react-router-dom'
 import { ContextCart } from '../../context/contextCartShopping'
 
 const NavBar = () => {
-    const { books } = React.useContext(ContextCart)
-    const genreBook = books.map(book => book.genre)
-    const genreSet = new Set(genreBook)
-    const uniqueGenres = [...genreSet]
-
+    const { uniqueGenres } = React.useContext(ContextCart)
     const capitalize = (str) => {
         return str
             .split(' ')

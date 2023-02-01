@@ -14,7 +14,7 @@ function App() {
 				<ProviderCart>
 					<Header />
 					<Routes>
-						<Route path='/' exact={true} element={
+						<Route path='/' element={
 							<>
 								<NavBar />
 								<ItemListContainer />
@@ -32,7 +32,7 @@ function App() {
 					</Routes>
 				</ProviderCart>
 			</BrowserRouter>
-		</div>
+		</div >
 	);
 }
 
