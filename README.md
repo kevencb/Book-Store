@@ -12,7 +12,7 @@ Proyecto desarrollado con React JS para el curso de Coder House. El desarrollo w
 
 ## Demo
 
-- <https://book-store-kevcb.netlify.app/>
+- <https://bookstore-kevcb.netlify.app/>
 
 ## Tech Stack & Author
 
