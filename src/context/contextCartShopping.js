@@ -1,26 +1,23 @@
-import React, { createContext, useEffect, useState } from 'react';
+import React, { createContext, useEffect, useState, useMemo } from 'react';
 import { useParams } from 'react-router-dom';
 import { productsCollection } from '../firebase/firebaseConfig'
-import { getDocs, query, where } from 'firebase/firestore';
+import { getDocs, query, where, getDoc, doc } from 'firebase/firestore';
+import { toast } from 'react-toastify';
+// import { getDoc, doc } from 'firebase/firestore';
 
 // Creamos el espacio o contexto global
 const ContextCart = createContext()
 
 const ProviderCart = ({ children }) => {
-    const { genreName } = useParams();
 
-    const [books, setBooks] = useState([])
     const [cart, setCart] = useState([])
-
-
-    const genreBook = books.map(book => book.genre)
-    const genreSet = new Set(genreBook)
-    const uniqueGenres = [...genreSet]
-
+    const [books, setBooks] = useState([])
+    const { genreName } = useParams()
 
     const addBookCart = (id, cover, title, author, price, subtotal) => {
         if (cart.length === 0) {
             setCart([{ id, cover, title, author, price, amount: 1, subtotal }])
+            toast.success(`Libro agregado: ${title}.`, { autoClose: 2000 })
         } else {
             // Revisar que el libro no este ya agregado.
             // Si ya esta, unicamente actulizamos su cantidad
@@ -39,6 +36,7 @@ const ProviderCart = ({ children }) => {
             } else {
                 newCart.push({ id, cover, title, author, price, amount: 1, subtotal })
             }
+            toast.success(`Libro agregado: ${title}.`, { autoClose: 2000 })
             setCart(newCart)
         }
     }
@@ -75,63 +73,38 @@ const ProviderCart = ({ children }) => {
         //actualizar el carrito
         setCart(newCart)
     }
-    //     const getBooks = () => {
-    //         return new Promise((res, rej) => {
-    //             setTimeout(() => {
-    //                 res(bookStore)
-    //             }, 0)
-    //         })
-    //     }
-    //     getBooks()
-    //         .then((res) => {
-    //             setBooks(res)
-    //         })
-    //         .catch((error) => {
-    //             console.log(error)
-    //         })
-    // }, [setCart]);
-
-    // useEffect(() => {
-    //     const getBooks = () => {
-    //         return new Promise((res, rej) => {
-    //             setTimeout(() => {
-    //                 res(bookStore)
-    //             }, 0)
-    //         })
-    //     }
-    //     getBooks()
-    //         .then((res) => {
-    //             setBooks(res)
-    //         })
-    //         .catch((error) => {
-    //             console.log(error)
-    //         })
-    // }, [setCart]);
 
     const totalNumberBooks = cart.reduce((acc, item) => {
         return acc += item.amount
     }, 0)
 
+    // Crea una variable para guardar el precio total
+    const total = useMemo(() => {
+        let total = 0;
+        // Itera sobre el carrito para sumar el precio de cada libro
+        cart.map((item) => {
+            item.subtotal = 0
+            item.subtotal += item.price * item.amount
+            total += item.subtotal
+        })
+        return total.toLocaleString('es-ES');
+    }, [cart]);
+
     useEffect(() => {
         const getBooks = () => {
             let filter
-            filter = query(productsCollection, where("genre", "==", "historia"))
-            // filter = query(productsCollection, where("genre", "==", "fantasia"))
-            // if (genreName) {
-            //     console.log("HOLA: + ")
-            // } else {
-            //     filter = productsCollection
-            //     console.log("hola desde else: " + filter)
-            // }
-
+            if (genreName) {
+                filter = query(productsCollection, where("genre", "==", genreName))
+            } else {
+                filter = productsCollection
+            }
             const pedidoPorCategoria = getDocs(filter)
+
             pedidoPorCategoria
-                // pedido
                 .then((resultado) => {
                     const productos = resultado.docs.map((doc) => {
                         return { ...doc.data(), id: doc.id }
                     })
-                    // setBooksCategories(productos)
                     setBooks(productos)
                 })
                 .catch((error) => {
@@ -141,105 +114,16 @@ const ProviderCart = ({ children }) => {
         getBooks()
     }, [genreName]);
 
-    // useEffect(() => {
-    //     const getBooks = () => {
-    //         return new Promise((res, rej) => {
-    //             /* Filtrando por genero */
-    //             const booksFilter = bookStore.filter(
-    //                 book => book.genre === genreName
-    //             )
-    //             const booksList = genreName ? booksFilter : bookStore
-    //             setTimeout(() => {
-    //                 res(booksList)
-    //             }, 0)
-    //         })
-    //     }
-    //     getBooks()
-    //         .then((res) => {
-    //             setBooksCategories(res)
-    //         })
-    //         .catch((error) => {
-    //             console.log(error)
-    //         })
-    // }, [genreName]);
-
-    // useEffect(() => {
-    //     const getBooks = () => {
-    //         const pedido = getDocs(productsCollection)
-    //         pedido
-    //             .then((resultado) => {
-    //                 const productos = resultado.docs.map((doc) => {
-    //                     return { ...doc.data(), id: doc.id }
-    //                 })
-    //                 setBooks(productos)
-    //                 setBooksCategories(productos)
-    //                 console.log(productos)
-    //             })
-    //             .catch((error) => {
-    //                 console.log(error)
-    //             })
-    //     }
-    //     getBooks()
-    // }, [setBooks]);
-
-    // useEffect(() => {
-    //     const getBooks = () => {
-    //         let filter
-    //         filter = query(productsCollection, where("genre", "==", "historia"))
-    //         // filter = query(productsCollection, where("genre", "==", "fantasia"))
-    //         // if (genreName) {
-    //         //     console.log("HOLA: + ")
-    //         // } else {
-    //         //     filter = productsCollection
-    //         //     console.log("hola desde else: " + filter)
-    //         // }
-
-    //         const pedidoPorCategoria = getDocs(filter)
-    //         pedidoPorCategoria
-    //             // pedido
-    //             .then((resultado) => {
-    //                 const productos = resultado.docs.map((doc) => {
-    //                     return { ...doc.data(), id: doc.id }
-    //                 })
-    //                 // setBooksCategories(productos)
-    //                 setBooks(productos)
-    //             })
-    //             .catch((error) => {
-    //                 console.log(error)
-    //             })
-    //     }
-    //     getBooks()
-    // }, [genreName]);
-
-
-    // useEffect(() => {
-    //     const getBooks = () => {
-    //         const pedido = getDocs(productsCollection)
-    //         pedido
-    //             .then((resultado) => {
-    //                 const productos = resultado.docs.map((doc) => {
-    //                     return { ...doc.data(), id: doc.id }
-    //                 })
-    //                 setBooksCategories(productos)
-    //             })
-    //             .catch((error) => {
-    //                 console.log(error)
-    //             })
-    //     }
-    //     getBooks()
-    // }, [genreName]);
-
     return (
         <ContextCart.Provider value={{
             cart,
-            books,
             addBookCart,
             totalNumberBooks,
-            // booksCategories,
             handleIncrement,
             handleDecrement,
-            // setBooksCategories,
-            uniqueGenres
+            total,
+            books,
+            setBooks
         }}>
             {children}
         </ContextCart.Provider>

@@ -1,39 +1,41 @@
-import React, { useEffect, useState } from "react"
-import { bookStore } from "../../data/bookStore";
+import React, { useEffect, useState, useContext } from "react"
 import { ItemList } from "../ItemList/ItemList";
-import { useParams } from 'react-router-dom';
+
+import { productsCollection } from '../../firebase/firebaseConfig'
+import { getDocs, query, where } from 'firebase/firestore';
+import { useParams } from "react-router-dom";
 import { ContextCart } from "../../context/contextCartShopping";
+
 const ItemListContainer = () => {
+    const { genreName } = useParams()
+    const { setBooks } = useContext(ContextCart);
 
-    const { books, booksCategories, setBooksCategories } = React.useContext(ContextCart)
+    useEffect(() => {
+        const getBooks = () => {
+            let filter
+            if (genreName) {
+                filter = query(productsCollection, where("genre", "==", genreName))
+            } else {
+                filter = productsCollection
+            }
+            const pedidoPorCategoria = getDocs(filter)
 
-    // const { genreName } = useParams()
-    // // const [booksCategories, setBooksCategories] = useState([])
-
-    // // useEffect(() => {
-    // //     const getBooks = () => {
-    // //         return new Promise((res, rej) => {
-    // //             /* Filtrando por genero */
-    // //             const booksFilter = bookStore.filter(
-    // //                 book => book.genre === genreName
-    // //             )
-    // //             const booksList = genreName ? booksFilter : bookStore
-    // //             setTimeout(() => {
-    // //                 res(booksList)
-    // //             }, 0)
-    // //         })
-    // //     }
-    // //     getBooks()
-    // //         .then((res) => {
-    // //             setBooksCategories(res)
-    // //         })
-    // //         .catch((error) => {
-    // //             console.log(error)
-    // //         })
-    // // }, [genreName]);
+            pedidoPorCategoria
+                .then((resultado) => {
+                    const productos = resultado.docs.map((doc) => {
+                        return { ...doc.data(), id: doc.id }
+                    })
+                    setBooks(productos)
+                })
+                .catch((error) => {
+                    console.log(error)
+                })
+        }
+        getBooks()
+    }, [genreName]);
 
     return (
-        <ItemList books={books} />
+        <ItemList />
     );
 }
 

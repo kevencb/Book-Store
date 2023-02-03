@@ -1,23 +1,11 @@
-import React, { useContext, useMemo } from 'react'
+import React, { useContext } from 'react'
 import '../../App.css';
 import './CartWidget.css'
 import { ContextCart } from '../../context/contextCartShopping';
 
 const CartWidget = () => {
 
-    const { cart, handleIncrement, handleDecrement } = useContext(ContextCart)
-
-    // Crea una variable para guardar el precio total
-    const total = useMemo(() => {
-        let total = 0;
-        // Itera sobre el carrito para sumar el precio de cada libro
-        cart.map((item) => {
-            item.subtotal = 0
-            item.subtotal += item.price * item.amount
-            total += item.subtotal
-        })
-        return total.toLocaleString('es-ES');
-    }, [cart]);
+    const { cart, handleIncrement, handleDecrement, total } = useContext(ContextCart)
 
     return (
         <div className="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="true" tabIndex="-1" id="cart-component" aria-labelledby="cart-componentLabel">

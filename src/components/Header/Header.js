@@ -7,11 +7,7 @@ import { ContextCart } from '../../context/contextCartShopping';
 
 const Header = () => {
 
-	const { cart, totalNumberBooks } = useContext(ContextCart)
-
-	// const totalNumberBooks = cart.reduce((acc, item) => {
-	// 	return acc += item.amount
-	// }, 0)
+	const { totalNumberBooks } = useContext(ContextCart)
 
 	return (
 		<>
@@ -29,7 +25,7 @@ const Header = () => {
 					</div>
 				</div>
 			</nav>
-			<CartWidget cart={cart} totalNumberBooks={totalNumberBooks} />
+			<CartWidget />
 			<UserProfile />
 		</>
 	);
