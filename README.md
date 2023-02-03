@@ -40,7 +40,7 @@ Proyecto desarrollado con React JS para el curso de Coder House. El desarrollo w
 
 ### 👨🏻‍💻¡Hola, Soy Keven CB  
 
-Productor multimedía. Estudiante en proceso de nuevas tecnologías, te dejo mis redes sociales para que puedas conocer más de mi y de mi trabajo.
+Productor multimedía. Estudiante en proceso de nuevas tecnologías, te dejo mis redes sociales para que puedas conocer más de mi, mi trabajo y contactarme.
 
 [![github](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/kevencb)
 [![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/keven-chaparro-658ab471/)
