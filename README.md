@@ -1,4 +1,4 @@
-# Book<i className="bi bi-bookmark-heart-fill"></i>Store
+# Book Store
 
 Proyecto desarrollado con React JS para el curso de Coder House. El desarrollo web presentado es un carrito de compras implementado para una tienda de libros llamada "BOOKSTORE".
 
