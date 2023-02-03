@@ -1,6 +1,5 @@
-import React, { useEffect, useState, useContext } from "react"
+import React, { useEffect, useContext } from "react"
 import { ItemList } from "../ItemList/ItemList";
-
 import { productsCollection } from '../../firebase/firebaseConfig'
 import { getDocs, query, where } from 'firebase/firestore';
 import { useParams } from "react-router-dom";
@@ -32,7 +31,7 @@ const ItemListContainer = () => {
                 })
         }
         getBooks()
-    }, [genreName]);
+    }, [genreName, setBooks]);
 
     return (
         <ItemList />

@@ -1,9 +1,9 @@
 import React, { useContext } from 'react'
-import '../../App.css';
 import { CartWidget } from '../CartWidget/CartWidget';
 import UserProfile from '../UserProfile/UserProfile';
 import { Link } from 'react-router-dom';
 import { ContextCart } from '../../context/contextCartShopping';
+import '../../App.css';
 
 const Header = () => {
 
@@ -31,4 +31,4 @@ const Header = () => {
 	);
 }
 
-export default Header;
+export { Header };

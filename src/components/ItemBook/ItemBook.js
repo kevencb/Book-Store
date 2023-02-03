@@ -5,8 +5,8 @@ import { ButtonAddCart } from '../Buttons/ButtonAddCart';
 const ItemBook = ({ book }) => {
     const { id, title, cover, author } = book
 
-    let numero = book.price
-    let newPrice = +numero
+    let number = book.price
+    let newPrice = +number
 
     return (
         <div className="card border-0 ">

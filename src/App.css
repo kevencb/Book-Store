@@ -85,3 +85,13 @@ i {
     font-size: 15px;
     font-weight: bold;
 }
+
+footer h6 {
+    font-size: 12px;
+    margin-right: 12px;
+}
+
+footer i {
+    font-size: 18px;
+    margin-right: 6px;
+}
